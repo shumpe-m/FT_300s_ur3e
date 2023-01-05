@@ -31,4 +31,8 @@ rosrun ur_motion_range tutorial.py
 rosrun ur_motion_range plotting_2d.py 
 ```
 
+
+## Motion trajectory
+- plotting_2d.pyを実行したディレクトリに "xxx.npy"ファイルが生成される。/space_data内にそのファイルを入れて、data_plot.pyのloadfile名を変更して実行すると次のグラフが生成される。
+
 ![demo](https://raw.github.com/wiki/shumpe-m/ur3e_tutorial/images/motion.png)
