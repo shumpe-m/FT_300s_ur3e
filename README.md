@@ -12,6 +12,7 @@ cd ur3e_tutorial/Docker
 ./run.sh
 ```
 ## Set up on desk
+![demo](https://raw.github.com/wiki/shumpe-m/ur3e_tutorial/images/motion.gif)
 - 4つのターミナルでそれぞれコマンドを使用。(docker exec -it ${docker_container_id} bash)
 
 ```
@@ -29,3 +30,5 @@ rosrun ur_motion_range tutorial.py
 ```
 rosrun ur_motion_range plotting_2d.py 
 ```
+
+![demo](https://raw.github.com/wiki/shumpe-m/ur3e_tutorial/images/motion.png)
