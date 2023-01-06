@@ -67,7 +67,7 @@ RUN cd /root/catkin_ws \
 ##############
 RUN cd /root/catkin_ws \
     && git clone -b melodic-devel-v2 https://github.com/shumpe-m/ur3.git src/ros_ur3 \
-    && git clone https://github.com/shumpe-m/ur3e-range-of-motion-survey.git src/ur3e-range-of-motion-survey
+    && git clone https://github.com/shumpe-m/ur3e_tutorial.git src/ur3e_tutorial
 
 RUN cd /root/catkin_ws \
     && rosinstall /root/catkin_ws/src /opt/ros/melodic src/ros_ur3/dependencies.rosinstall \
