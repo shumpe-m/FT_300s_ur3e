@@ -11,7 +11,7 @@ import rospy
 import moveit_commander
 import moveit_msgs.msg
 import geometry_msgs.msg
-# from visualization_msgs.msg import Marker
+from visualization_msgs.msg import Marker
 import json
 
 import numpy as np
@@ -30,12 +30,6 @@ class rviz_setup(object):
 
     def __init__(self, name = 'manipulator'):
         super(rviz_setup, self).__init__()
-        self.client = roslibpy.Ros(host='localhost', port=9090)
-        self.client.run()
-        self.marker_publisher = roslibpy.Topic(client, '/mesh_marker', 'visualization_msgs/Marker')
-        # # Mesh file message
-        # rospy.init_node('mesh_publisher')
-        # self.mesh_pub = rospy.Publisher('mesh_marker', Marker, queue_size=10)
 
         moveit_commander.roscpp_initialize(sys.argv)
         rospy.init_node("ur_planner", anonymous=True)
@@ -81,10 +75,12 @@ class rviz_setup(object):
 
 
 
-
     def wait_for_state_update(
         self, box_is_known=False, box_is_attached=False, timeout=4
     ):
+        # Copy class variables to local variables to make the web tutorials more clear.
+        # In practice, you should use the class variables directly unless you have a good
+        # reason not to.
         box_name = self.box_name
         scene = self.scene
 
@@ -123,13 +119,19 @@ class rviz_setup(object):
         box_pose.pose.position.z = pose[2]
         scene.add_box(box_name, box_pose, size=(size[0], size[1], size[2]))
 
-        self.box_name = box_name
         return self.wait_for_state_update(box_is_known=True, timeout=timeout)
 
-    def add_mesh(self, marker):
-        self.marker_publisher.publish(json.dumps(marker))
-        self.client.terminate()
+    def add_mesh(self, name = "", pose = [0, 0, 0], size_scale = [1, 1, 1], timeout=4):
+        mesh_name = name
+        scene = self.scene
+        mesh_file = '/root/catkin_ws/src/ur3e_tutorial/ur_gazebo_motion_range/models/workspace/meshes/workspace.stl'
 
+        mesh_pose = geometry_msgs.msg.PoseStamped()
+        mesh_pose.header.frame_id = "world"
+        mesh_pose.pose.position.x = pose[0]
+        mesh_pose.pose.position.y = pose[1]
+        mesh_pose.pose.position.z = pose[2]
+        scene.add_mesh(mesh_name, mesh_pose, mesh_file, size=(size_scale[0], size_scale[1], size_scale[2]))
 
 
 
@@ -140,28 +142,7 @@ def main():
 
         motion.add_box(name = "base_box", pose = [0, 0, 0.05], size = [0.9, 0.12, 0.099])
         motion.add_box(name = "table", pose = [0, 0, -0.0025], size = [0.9, 1.2, 0.005])
-
-        marker = {
-            "header": {
-                "frame_id": "world"
-            },
-            "type": "mesh_resource",
-            "mesh_resource": "package://your_package_name/path/to/mesh_file.dae",
-            "action": "add",
-            "scale": {
-                "x": 1,
-                "y": 1,
-                "z": 1
-            },
-            "color": {
-                "r": 1.0,
-                "g": 0.0,
-                "b": 0.0,
-                "a": 1.0
-            }
-        }
-        
-
+        motion.add_mesh()
 
     except rospy.ROSInterruptException:
         return
