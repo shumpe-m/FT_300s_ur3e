@@ -208,7 +208,7 @@ class ur_control(object):
         display_trajectory_publisher.publish(display_trajectory)
 
     def setup_bias(self):
-        pose = print_current_pose()
+        pose = self.print_current_pose()
         self.x_bias = pose.position.x
 
         self.z_bias = 0.88

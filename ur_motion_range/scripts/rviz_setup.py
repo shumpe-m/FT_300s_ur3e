@@ -121,10 +121,24 @@ class rviz_setup(object):
 
         return self.wait_for_state_update(box_is_known=True, timeout=timeout)
 
-    def add_mesh(self, name = "", pose = [0, 0, 0], size_scale = [1, 1, 1], timeout=4):
+
+    def add_cylinder(self, name = "", pose = [0, 0, 0], height = 0.1, radius = 0.1, timeout=4):
+        cylinder_name = name
+        scene = self.scene
+
+        cylinder_pose = geometry_msgs.msg.PoseStamped()
+        cylinder_pose.header.frame_id = "world"
+        #box_pose.pose.orientation.w = 1.0
+        cylinder_pose.pose.position.x = pose[0]
+        cylinder_pose.pose.position.y = pose[1]
+        cylinder_pose.pose.position.z = pose[2]
+        scene.add_cylinder(cylinder_name, cylinder_pose, height = height, radius = radius)
+
+
+    def add_mesh(self, name = "", pose = [0.12, 0.12, 0], size_scale = [0.01, 0.01, 0.01], timeout=4):
         mesh_name = name
         scene = self.scene
-        mesh_file = '/root/catkin_ws/src/ur3e_tutorial/ur_gazebo_motion_range/models/workspace/meshes/workspace.stl'
+        mesh_file = '/root/catkin_ws/src/ur3e_tutorial/ur_gazebo_motion_range/models/dish/mesh/dish.stl'
 
         mesh_pose = geometry_msgs.msg.PoseStamped()
         mesh_pose.header.frame_id = "world"
@@ -140,9 +154,14 @@ def main():
         print("----------------------------------------------------------")
         motion = rviz_setup("arm")
 
-        motion.add_box(name = "base_box", pose = [0, 0, 0.05], size = [0.9, 0.12, 0.099])
+        motion.add_box(name = "base_box", pose = [0, 0, 0.05], size = [0.9, 0.13, 0.099])
         motion.add_box(name = "table", pose = [0, 0, -0.0025], size = [0.9, 1.2, 0.005])
-        motion.add_mesh()
+        #motion.add_mesh(name = "dish1", pose = [0.12, 0.12, 0.01], size_scale = [0.01, 0.01, 0.01])
+
+        height = 0.02
+        radius = 0.18 / 2
+        motion.add_cylinder(name = "dish1", pose = [0.03 + radius, 0.06 + 0.2 + radius, height/2], height = height, radius = radius)
+        motion.add_cylinder(name = "dish2", pose = [-1 * (0.03 + radius), 0.06 + 0.2 + radius, height/2], height = height, radius = radius)
 
     except rospy.ROSInterruptException:
         return
