@@ -2,11 +2,11 @@
 
 <sdf version="1.6">
 
-  <world name="ur3_cubes">
+  <world name="ur3_workspace">
     
     <gui>
       <camera name='user_camera'>
-        <pose frame=''>1.28552 1.43709 1.77307 0 0.43 -1.99519</pose>
+        <pose frame=''>0 1.0 0 0 0.43 0</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -44,19 +44,7 @@
     <!-- <plugin name="ros_link_attacher_plugin" -->
     <!--         filename="libgazebo_ros_link_attacher.so"/> -->
 
-    <!-- The robot base
-    <model name="ur_base">
-      <include>
-        <uri>model://ur_base</uri>
-        <pose>0 0 0 0 0 0</pose>
-      </include>
-    </model>
-    -->
-
-    <!-- Table -->
-    <!-- Table top is at (x,y,z) = (0.7, 0, 0.775) -->
-    <!-- Table top size is 0.9x0.9 -->
-    <model name="cafe_table">
+    <model name="workspace">
       <static>true</static>
       <include>
         <uri>model://workspace</uri>
@@ -64,8 +52,40 @@
       </include>
     </model>
 
+    <model name="base_cube">
+      <static>true</static>
+      <pose>0 0 0.78 0 0 0</pose>
+      <link name="link">
+        <pose>0 0 0.05 0 0 0</pose>
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>2.3541666666666672e-05</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>2.3541666666666672e-05</iyy>
+            <iyz>0</iyz>
+            <izz>2.3541666666666672e-05</izz>
+          </inertia>
+        </inertial>
+        <visual name="visual">
+          <geometry>
+            <box>
+              <size>0.9 0.13 0.1</size>
+            </box>
+          </geometry>
+        </visual>
+        <collision name="collision">
+          <geometry>
+            <box>
+              <size>0.9 0.13 0.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
 
-    <model name="dish1">
+        <model name="dish1">
       <static>true</static>
       <link name="link">
         <pose>0.0925 0.35 0.79 0 0 0</pose>
@@ -120,39 +140,6 @@
             </script>
           </material>
         </visual>
-      </link>
-    </model>
-
-    <model name="base_cube">
-      <static>true</static>
-      <pose>0 0 0.78 0 0 0</pose>
-      <link name="link">
-        <pose>0 0 0.05 0 0 0</pose>
-        <inertial>
-          <mass>0.1</mass>
-          <inertia>
-            <ixx>2.3541666666666672e-05</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>2.3541666666666672e-05</iyy>
-            <iyz>0</iyz>
-            <izz>2.3541666666666672e-05</izz>
-          </inertia>
-        </inertial>
-        <visual name="visual">
-          <geometry>
-            <box>
-              <size>0.9 0.13 0.1</size>
-            </box>
-          </geometry>
-        </visual>
-        <collision name="collision">
-          <geometry>
-            <box>
-              <size>0.9 0.13 0.1</size>
-            </box>
-          </geometry>
-        </collision>
       </link>
     </model>
 

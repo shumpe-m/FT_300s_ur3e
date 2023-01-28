@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 # Python 2 compatibility imports
+"""
+Copyright (c) 2008-2013, Willow Garage, Inc.
+Copyright (c) 2015-2019, PickNik, LLC.
+https://github.com/ros-planning/moveit_tutorials/blob/master/LICENSE.txt
+"""
 from __future__ import print_function
 from six.moves import input
 
@@ -24,18 +29,8 @@ except:  # For Python 2 compatibility
         return sqrt(sum((p_i - q_i) ** 2.0 for p_i, q_i in zip(p, q)))
 
 
-
-# https://github.com/ros-planning/moveit_tutorials/blob/master/doc/move_group_python_interface/scripts/move_group_python_interface_tutorial.py
+"""Modifications copyright (C) 2022 Shumpe MORITA."""
 def all_close(goal, actual, tolerance, premitive = ""):
-    """
-    Convenience method for testing if the values in two lists are within a tolerance of each other.
-    For Pose and PoseStamped inputs, the angle between the two quaternions is compared (the angle
-    between the identical orientations q and -q is calculated correctly).
-    @param: goal       A list of floats, a Pose or a PoseStamped
-    @param: actual     A list of floats, a Pose or a PoseStamped
-    @param: tolerance  A float
-    @returns: bool
-    """
     if type(goal) is list:
         for index in range(len(goal)):
             if abs(actual[index] - goal[index]) > tolerance:

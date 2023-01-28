@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 # Python 2/3 compatibility imports
+"""
+Copyright (c) 2008-2013, Willow Garage, Inc.
+Copyright (c) 2015-2019, PickNik, LLC.
+https://github.com/ros-planning/moveit_tutorials/blob/master/LICENSE.txt
+"""
 from __future__ import print_function
 from six.moves import input
 
@@ -25,9 +30,8 @@ except:  # For Python 2 compatibility
     def dist(p, q):
         return sqrt(sum((p_i - q_i) ** 2.0 for p_i, q_i in zip(p, q)))
 
-
+"""Modifications copyright (C) 2022 Shumpe MORITA."""
 class rviz_setup(object):
-
     def __init__(self, name = 'manipulator'):
         super(rviz_setup, self).__init__()
 
@@ -43,27 +47,14 @@ class rviz_setup(object):
             moveit_msgs.msg.DisplayTrajectory,
             queue_size=20,
         )
-        # We can get the name of the reference frame for this robot:
         planning_frame = move_group.get_planning_frame()
-        print("============ Planning frame: %s" % planning_frame)
 
-        # We can also print the name of the end-effector link for this group:
         move_group.set_end_effector_link("ur_gripper_tip_link")
         eef_link = move_group.get_end_effector_link()
-        print("============ End effector link: %s" % eef_link)
 
         # We can get a list of all the groups in the robot:
         group_names = robot.get_group_names()
-        print("============ Available Planning Groups:", robot.get_group_names())
 
-        # Sometimes for debugging it is useful to print the entire state of the
-        # robot:
-        print("============ Printing robot state")
-        print(robot.get_current_state())
-        print("")
-        ## END_SUB_TUTORIAL
-
-        # Misc variables
         self.box_name = ""
         self.robot = robot
         self.scene = scene
@@ -121,10 +112,7 @@ class rviz_setup(object):
         box_pose.pose.orientation.y = 0
         box_pose.pose.orientation.z = 1.0
         box_pose.pose.orientation.w = 0
-        # box_pose.color.r = color[0]
-        # box_pose.color.g = color[1]
-        # box_pose.color.b = color[2]
-        # box_pose.color.a = color[3]
+
         scene.add_box(box_name, box_pose, size=(size[0], size[1], size[2]))
 
         return self.wait_for_state_update(box_is_known=True, timeout=timeout)
@@ -144,10 +132,7 @@ class rviz_setup(object):
         cylinder_pose.pose.orientation.y = 0
         cylinder_pose.pose.orientation.z = 1.0
         cylinder_pose.pose.orientation.w = 0
-        # cylinder_pose.color.r = color[0]
-        # cylinder_pose.color.g = color[1]
-        # cylinder_pose.color.b = color[2]
-        # cylinder_pose.color.a = color[3]
+
         scene.add_cylinder(cylinder_name, cylinder_pose, height = height, radius = radius)
 
 

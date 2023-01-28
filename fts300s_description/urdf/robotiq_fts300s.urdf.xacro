@@ -33,14 +33,6 @@
             </collision>
         </link>
 
-        <!-- virtual measurement frame -->
-        <joint name="${prefix}measurment_joint" type="fixed" >
-            <origin xyz="0 0 0.01625" rpy="0 0 0" />
-            <parent link="${prefix}fts_robotside" />
-            <child link="${prefix}robotiq_force_torque_frame_id" />
-        </joint>
-        <link name="${prefix}robotiq_force_torque_frame_id"/>
-
         <!-- toolside frame -->
         <joint name="${prefix}toolside_joint" type="fixed" >
             <origin xyz="0 0 0.03851" rpy="0 0 0" />

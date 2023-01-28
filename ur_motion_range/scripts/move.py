@@ -6,21 +6,17 @@ from six.moves import input
 import sys
 import time
 import copy
-import rospy
-import geometry_msgs.msg
 import math
 
 import arm
 import gripper
 
+"""Modifications copyright (C) 2022 Shumpe MORITA."""
 class ur_control(object):
-    """MoveGroupPythonInterfaceTutorial"""
-
     def __init__(self):
         super(ur_control, self).__init__()
         self.arm_control = arm.arm_control("arm")
         self.gripper_control = gripper.gripper_control("gripper")
-
         self.goal_positions = [[0.2, 0.45, 0.2],
                              [0.2, 0.25, 0.2],
                              [-0.21, 0.25, 0.2],
@@ -35,35 +31,15 @@ class ur_control(object):
                              [-0.05, 0.45, 0.1],
                              [-0.05, 0.35, 0.1],
                              [-0.05, 0.25, 0.1]]
- 
-
 
 
     def arm_action(self):
         joint_ang = [1.57, -1.57/2, 1.57/2, -1.57, -1.57, 0] #0~3.14, -3.14~0, 
-        # motion.setup_bias()
-        # self.arm_control.go_to_joint_state(joint_ang)
-        # default_pose = self.arm_control.print_current_pose()
-        # print(default_pose)
-        # success, goal_pose = self.arm_control.go_to_position(position = [-0.05, 0.35, 0.1])
-        # print(self.arm_control.quaternion_to_euler(default_pose.orientation))
-        # q = self.arm_control.euler_to_quaternion(euler = [3.14, -3.14/4, 0])
-        # rot_success = self.arm_control.go_to_pose(pose = [-0.1, 0.4, 0.1], q = q)
-        # q = self.arm_control.euler_to_quaternion(euler = [3.14, -3.14/3, 0])
-        # rot_success = self.arm_control.go_to_pose(pose = [-0.1, 0.4, 0.1], q = q)
-        # rot_success = self.arm_control.go_to_pose(pose = [-0.5, 0.4, 0.1], q = q)
-
-        # euler  default:[3.14, 0, 0]   max+-1.54
-        # q = self.arm_control.euler_to_quaternion(euler = [3.14-3.14/8, 0, 0])
-        # rot_success = self.arm_control.go_to_pose(pose = self.goal_positions[0], q = q)
-        # q = self.arm_control.euler_to_quaternion(euler = [3.14-3.14/2, 0, 0])
-        # rot_success = self.arm_control.go_to_pose(pose = self.goal_positions[0], q = q)
         suc_data = []
         for goal_position in self.goal_positions:
             print("-----------------------------------------")
             print(goal_position)
             print("-----------------------------------------")
-
             self.arm_control.go_to_joint_state(joint_ang)
             default_pose = self.arm_control.print_current_pose()
 
@@ -84,9 +60,6 @@ class ur_control(object):
         print("---------------- num of success ----------------")
         print(suc_data)
         print("-----------------------------------------")
-
-
-
 
 
     def gripper_action(self):

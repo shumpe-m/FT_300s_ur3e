@@ -1,17 +1,21 @@
-# ur3e_tutorial
+# FT_300s_ur3e
+- This repository is equipped with robotiq's FT 300-S Force Torque Sensor and Hande on ur3e.
 
-- ubuntu18.04, melodic
+- ubuntu18.04, melodic, python2
 
 - reference https://github.com/cambel/ur3.git
-## Set up
-- Dockerによる環境構築
+
+## Docker set up
+- Docker environment building.
 ```
 git clone https://github.com/shumpe-m/ur3e_tutorial.git
-cd ur3e_tutorial/Docker
+cd FT_300s_ur3e/Docker
 ./build.sh
 ./run.sh
 ```
-## Set up on desk
+## Examples
+# 
+
 ![demo](https://raw.github.com/wiki/shumpe-m/ur3e_tutorial/images/motion.gif)
 - 4つのターミナルでそれぞれコマンドを使用。(docker exec -it ${docker_container_id} bash)
 
