@@ -24,7 +24,7 @@ roslaunch ur_hande_moveit_config start_moveit.launch
 ```
 
 ```
-rosrun ur_motion_range tutorial.py 
+rosrun ur_motion_range move.py 
 ```
 
 ```

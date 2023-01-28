@@ -233,13 +233,23 @@ class ur_control(object):
     def euler_to_quaternion(self, euler = [3.140876586229683, 0.0008580159308600959, -0.0009655065200909574]):
         """Convert Euler Angles to Quaternion
         """
-        q = tf.transformations.quaternion_from_euler(euler[0], euler[1], euler[2])
+        if type(euler) == geometry_msgs.msg.Pose:
+            print("The type of variables is different.")
+        elif type(euler) == list:
+            q = tf.transformations.quaternion_from_euler(euler[0], euler[1], euler[2])
+        else:
+            print("The type of variables is different.")
         return q
 
     def quaternion_to_euler(self, quaternion):
         """Convert Quaternion to Euler Angles
         """
-        e = tf.transformations.euler_from_quaternion((quaternion[0], quaternion[1], quaternion[2], quaternion[3]))
+        if type(quaternion) == geometry_msgs.msg.Pose:
+            q = tf.transformations.euler_from_quaternion(quaternion.x, quaternion.y, quaternion.z, quaternion.w)
+        elif type(quaternion) == list:
+            q = tf.transformations.euler_from_quaternion(quaternion[0], quaternion[1], quaternion[2], quaternion[3]))
+        else:
+            print("The type of variables is different.")
         return e
 
     def print_current_pose(self, end_effector_link_name = "ur_gripper_tip_link"):

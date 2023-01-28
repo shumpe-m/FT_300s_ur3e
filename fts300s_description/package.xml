@@ -10,7 +10,7 @@
   </description>
 
   <author email="d1301539@gmail.com">Shumpe MORITA</author>
-  <maintainer email="d1301539@gmail.com">Shunpei Morita</maintainer>
+  <maintainer email="d1301539@gmail.com">Shunpei MORITA</maintainer>
   <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
