@@ -3,7 +3,7 @@
   <model name="measurement">
     <static>true</static>
     <link name="link">
-    <!--
+
       <collision name="collision">
         <geometry>
           <mesh>
@@ -20,7 +20,7 @@
           </friction>
         </surface>
       </collision>
-      -->
+
       <visual name="visual">
         <geometry>
           <mesh>

@@ -20,14 +20,16 @@ cd FT_300s_ur3e/Docker
 - 4つのターミナルでそれぞれコマンドを使用。(docker exec -it ${docker_container_id} bash)
 
 ```
-roslaunch ur_gazebo_motion_range ur_gripper_hande.launch
+roslaunch ur_gazebo_motion_range ur_hande_tf300.launch
 ```
 
 ```
 roslaunch ur_hande_moveit_config start_moveit.launch
+
 ```
 
 ```
+rosrun ur_motion_range rviz_setup.py 
 rosrun ur_motion_range move.py 
 ```
 

@@ -154,8 +154,9 @@ def main():
     try:
         print("----------------------------------------------------------")
         motion = rviz_setup("arm")
-
+        # motion.add_box(name = "FAKE", pose = [3, 3, 0.05], size = [0.1, 0.1, 0.1])
         table_length = [0.9, 1.2]
+
         motion.add_box(name = "base_box", pose = [0, 0, 0.05], size = [table_length[0], 0.13, 0.099])
         motion.add_box(name = "table", pose = [0, 0, -0.0025], size = [table_length[0], table_length[1], 0.005])
 
@@ -175,6 +176,9 @@ def main():
         motion.add_cylinder(name = "dish1", pose = [0.0925, 0.35, height/2], height = height, radius = radius)
         motion.add_cylinder(name = "dish2", pose = [-0.1075, 0.35, height/2], height = height, radius = radius)
 
+        motion.add_cylinder(name = "dish3", pose = [0.0925, -0.35, height/2], height = height, radius = radius)
+        motion.add_cylinder(name = "dish4", pose = [-0.1075, -0.35, height/2], height = height, radius = radius)
+
     except rospy.ROSInterruptException:
         return
     except KeyboardInterrupt:
@@ -183,4 +187,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    #rrtconect

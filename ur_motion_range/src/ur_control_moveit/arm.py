@@ -18,6 +18,8 @@ import moveit_commander
 import moveit_msgs.msg
 import geometry_msgs.msg
 
+from gazebo_msgs.msg import ModelStates
+
 import numpy as np
 
 try:
@@ -150,24 +152,29 @@ class arm_control(object):
         return plan.joint_trajectory.header.frame_id!=[], wpose
 
 
-    def go_to_pose(self, pose, q = [0.0, 0.0, 0.0, 0.0]):
+    def go_to_pose(self, pose, ori = [0.0, 0.0, 0.0, 0.0]):
         move_group = self.move_group
         move_group.set_end_effector_link("ur_gripper_tip_link")
         wpose = move_group.get_current_pose().pose
         if type(pose) == geometry_msgs.msg.Pose:
-            wpose.position.x = pose.position.x
-            wpose.position.y = pose.position.y
-            wpose.position.z = pose.position.z
+            wpose.position = pose.position
         elif type(pose) == list:
             wpose.position.x = pose[0]
             wpose.position.y = pose[1]
             wpose.position.z = pose[2]
         else:
-            print("The type of variables is different.")
-        wpose.orientation.x = q[0]
-        wpose.orientation.y = q[1]
-        wpose.orientation.z = q[2]
-        wpose.orientation.w = q[3]
+            print("The type of variables is different: pose")
+
+
+        if type(ori) == geometry_msgs.msg._Quaternion.Quaternion:
+            wpose.orientation = ori
+        elif type(ori) == list:
+            wpose.orientation.x = ori[0]
+            wpose.orientation.y = ori[1]
+            wpose.orientation.z = ori[2]
+            wpose.orientation.w = ori[3]
+        else:
+            print("The type of variables is different: ori")
 
         move_group.set_pose_target(wpose)
 
@@ -180,16 +187,22 @@ class arm_control(object):
 
         return plan.joint_trajectory.points!=[]
 
-    def rot_motion(self, pose, q = [1.0, 0.0, 0.0, 0.0]):
+    def rot_motion(self, pose, ori = [1.0, 0.0, 0.0, 0.0]):
         move_group = self.move_group
         move_group.set_end_effector_link("ur_gripper_tip_link")
         wpose = move_group.get_current_pose().pose
         wpose.position = pose.position
         current_pose = copy.deepcopy(wpose)
-        wpose.orientation.x = q[0]
-        wpose.orientation.y = q[1]
-        wpose.orientation.z = q[2]
-        wpose.orientation.w = q[3]
+
+        if type(ori) == geometry_msgs.msg._Quaternion.Quaternion:
+            wpose.orientation = ori
+        elif type(ori) == list:
+            wpose.orientation.x = ori[0]
+            wpose.orientation.y = ori[1]
+            wpose.orientation.z = ori[2]
+            wpose.orientation.w = ori[3]
+        else:
+            print("The type of variables is different.")
 
         move_group.set_pose_target(wpose)
 
@@ -244,17 +257,19 @@ class arm_control(object):
             q = tf.transformations.quaternion_from_euler(euler[0], euler[1], euler[2])
         else:
             print("The type of variables is different.")
+
         return q
 
     def quaternion_to_euler(self, quaternion):
         # Convert Quaternion to Euler Angles
-        print(quaternion)
+        
         if type(quaternion) == geometry_msgs.msg._Quaternion.Quaternion:
             e = tf.transformations.euler_from_quaternion((quaternion.x, quaternion.y, quaternion.z, quaternion.w))
         elif type(quaternion) == list:
             e = tf.transformations.euler_from_quaternion((quaternion[0], quaternion[1], quaternion[2], quaternion[3]))
         else:
             print("The type of variables is different.")
+
         return e
 
     def print_current_pose(self, end_effector_link_name = "ur_gripper_tip_link"):
@@ -298,4 +313,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    #rrtconect
