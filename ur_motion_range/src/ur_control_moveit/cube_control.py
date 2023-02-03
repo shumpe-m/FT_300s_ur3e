@@ -36,10 +36,18 @@ class cube_control():
         elif range == "dish1":
             state_msg.pose.position.x = np.cos(rand[0] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish1_center[0]
             state_msg.pose.position.y = np.sin(rand[1] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish1_center[1]
-        elif range == "dish2":
         # dish 2
+        elif range == "dish2":
             state_msg.pose.position.x = np.cos(rand[0] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish2_center[0]
             state_msg.pose.position.y = np.sin(rand[1] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish2_center[1]
+        # dish 3
+        elif range == "dish3":
+            state_msg.pose.position.x = np.cos(rand[0] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish1_center[0]
+            state_msg.pose.position.y = np.sin(rand[1] * 2 * np.pi) * (self.dish_radius - 0.025) - self.dish1_center[1]
+        # dish 4
+        elif range == "dish4":
+            state_msg.pose.position.x = np.cos(rand[0] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish2_center[0]
+            state_msg.pose.position.y = np.sin(rand[1] * 2 * np.pi) * (self.dish_radius - 0.025) - self.dish2_center[1]
         else:
             print("Input Error: 'range'")
     

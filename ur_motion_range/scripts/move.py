@@ -63,17 +63,17 @@ class ur_control(object):
         print("-----------------------------------------")
 
 
-    def pick_and_place(self):
+    def pick_and_place(self, name = "dish2"):
         joint_ang = [1.57, -1.57, 1.26, -1.57, -1.57, 0] #0~3.14, -3.14~0, 
         self.arm_control.go_to_joint_state(joint_ang)
 
         cube_con = cube_control.cube_control()
-        cube_con.pose_control(model_name = "cube1", range = "dish2")
-        time.sleep(0.1)
-        cube_con.pose_control(model_name = "cube2", range = "dish2")
-        time.sleep(0.1)
-        cube_con.pose_control(model_name = "cube3", range = "dish2")
-        time.sleep(0.5)
+        cube_con.pose_control(model_name = "cube1", range = name)
+        time.sleep(0.2)
+        cube_con.pose_control(model_name = "cube2", range = name)
+        time.sleep(0.2)
+        cube_con.pose_control(model_name = "cube3", range = name)
+        time.sleep(0.6)
         model_sta = model_state.model_state()
         cube_pose = model_sta.get_model_pose(model_name = "cube3")
         # print(self.arm_control.print_current_pose())
@@ -111,6 +111,18 @@ class ur_control(object):
         self.gripper_control.gripper_open()
         self.gripper_control.gripper_close()
 
+    def ex(self):
+        # q = self.arm_control.euler_to_quaternion(euler = [3.14, 0, 0])
+        # pick_p = [0.2, -0.45, 0.2]
+        # rot_success = self.arm_control.go_to_pose(pose = pick_p, ori = q.tolist())
+
+        joint_ang = [1.57, -1.57, 1.26, -1.57, -1.57, 0] #0~3.14, -3.14~0, 
+        self.arm_control.go_to_joint_state(joint_ang)
+
+        joint_ang = [1.57/2, -1.57, 1.26, -1.57, -1.57, 0] #0~3.14, -3.14~0, 
+        self.arm_control.go_to_joint_state(joint_ang)
+
+
 
 
 def main():
@@ -118,8 +130,10 @@ def main():
         action = ur_control()
         # action.arm_action()
         # action.gripper_action()
-        for idx in range(6):
-            action.pick_and_place()
+        for idx in range(10):
+            name = "dish2" if idx % 2 == 0 else "dish3" 
+            action.pick_and_place(name)
+        # action.ex()
         
 
     except rospy.ROSInterruptException:

@@ -154,20 +154,20 @@ def main():
     try:
         print("----------------------------------------------------------")
         motion = rviz_setup("arm")
-        # motion.add_box(name = "FAKE", pose = [3, 3, 0.05], size = [0.1, 0.1, 0.1])
+        motion.add_box(name = "FAKE", pose = [3, 3, 0.05], size = [0.1, 0.1, 0.1])
         table_length = [0.9, 1.2]
 
         motion.add_box(name = "base_box", pose = [0, 0, 0.05], size = [table_length[0], 0.13, 0.099])
         motion.add_box(name = "table", pose = [0, 0, -0.0025], size = [table_length[0], table_length[1], 0.005])
 
         # restriction
-        wall_height = 1.2
+        wall_height = 0.7
         wall_length = table_length
         motion.add_box(name = "wall1", pose = [0, -(0.005 + wall_length[1])/2, wall_height / 2], size = [wall_length[0], 0.005, wall_height])
         motion.add_box(name = "wall2", pose = [-(0.005 + wall_length[0])/2, 0, wall_height / 2], size = [0.005, wall_length[1], wall_height])
         motion.add_box(name = "wall3", pose = [0, (0.005 + wall_length[1])/2, wall_height / 2], size = [wall_length[0], 0.005, wall_height])
         motion.add_box(name = "wall4", pose = [(0.005 + wall_length[0])/2, 0, wall_height / 2], size = [0.005, wall_length[1], wall_height])
-        # motion.add_box(name = "ceiling", pose = [0, 0, wall_height + 0.0025], size = [table_length[0], table_length[1], 0.005])
+        motion.add_box(name = "ceiling", pose = [0, 0, wall_height + 0.0025], size = [table_length[0], table_length[1], 0.005])
 
         # motion.add_mesh(name = "dish1", pose = [0.12, 0.12, 0.01], size_scale = [0.01, 0.01, 0.01])
 
