@@ -8,7 +8,7 @@
 ## Docker set up
 - Docker environment building.
 ```
-git clone https://github.com/shumpe-m/ur3e_tutorial.git
+git clone https://github.com/shumpe-m/FT_300s_ur3e.git
 cd FT_300s_ur3e/Docker
 ./build.sh
 ./run.sh

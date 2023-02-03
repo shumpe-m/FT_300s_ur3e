@@ -67,7 +67,7 @@ RUN cd /root/catkin_ws \
 ##############
 RUN cd /root/catkin_ws \
     && git clone -b melodic-devel-v2 https://github.com/shumpe-m/ur3.git src/ros_ur3 \
-    && git clone https://github.com/shumpe-m/ur3e_tutorial.git src/ur3e_tutorial 
+    && git clone https://github.com/shumpe-m/FT_300s_ur3e.git src/FT_300s_ur3e
 
 RUN cd /root/catkin_ws \
     && rosinstall /root/catkin_ws/src /opt/ros/melodic src/ros_ur3/dependencies.rosinstall \
@@ -77,7 +77,7 @@ RUN cd /root/catkin_ws \
     && echo "source /root/catkin_ws/devel/setup.bash" >> ~/.bashrc \
     && echo "export ROS_PACKAGE_PATH=\${ROS_PACKAGE_PATH}:/root/catkin_ws" >> ~/.bashrc \
     && echo "export ROS_WORKSPACE=/root/catkin_ws" >> ~/.bashrc \
-    && echo "chmod -R u+x /root/catkin_ws/src/ur3e_tutorial/ur_motion_range/scripts" >> ~/.bashrc
+    && echo "chmod -R u+x /root/catkin_ws/src/FT_300s_ur3e/ur_motion_range/scripts" >> ~/.bashrc
 
 
 RUN echo "cd ~/catkin_ws" >> ~/.bashrc
