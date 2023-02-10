@@ -18,9 +18,13 @@ class cube_control():
         # dish radius
         self.dish_radius = 0.09
         # dish1
-        self.dish1_center = [0.0925, 0.35, 0.79]
+        self.dish1_center = [0.0925, 0.35, 0.7801]
         # dish2
-        self.dish2_center = [-0.1075, 0.35, 0.79]
+        self.dish2_center = [-0.1075, 0.35, 0.7801]
+        # dish3
+        self.dish3_center = [0.0935, -0.35, 0.7801]
+        # dish4
+        self.dish4_center = [-0.1065, -0.35, 0.7801]
 
 
     def pose_control(self, model_name = "cube1", range = "dish1"):
@@ -42,18 +46,18 @@ class cube_control():
             state_msg.pose.position.y = np.sin(rand[1] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish2_center[1]
         # dish 3
         elif range == "dish3":
-            state_msg.pose.position.x = np.cos(rand[0] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish1_center[0]
-            state_msg.pose.position.y = np.sin(rand[1] * 2 * np.pi) * (self.dish_radius - 0.025) - self.dish1_center[1]
+            state_msg.pose.position.x = np.cos(rand[0] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish3_center[0]
+            state_msg.pose.position.y = np.sin(rand[1] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish3_center[1]
         # dish 4
         elif range == "dish4":
-            state_msg.pose.position.x = np.cos(rand[0] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish2_center[0]
-            state_msg.pose.position.y = np.sin(rand[1] * 2 * np.pi) * (self.dish_radius - 0.025) - self.dish2_center[1]
+            state_msg.pose.position.x = np.cos(rand[0] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish4_center[0]
+            state_msg.pose.position.y = np.sin(rand[1] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish4_center[1]
         else:
             print("Input Error: 'range'")
     
         state_msg.pose.position.z = 0.9
 
-        q = tf.transformations.quaternion_from_euler(0, 0, rand[2] * np.pi)
+        q = tf.transformations.quaternion_from_euler(0, 0, (rand[2] - 0.5) * np.pi + np.pi/2)
         state_msg.pose.orientation.x = q[0]
         state_msg.pose.orientation.y = q[1]
         state_msg.pose.orientation.z = q[2]

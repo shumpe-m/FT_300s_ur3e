@@ -171,13 +171,13 @@ def main():
 
         # motion.add_mesh(name = "dish1", pose = [0.12, 0.12, 0.01], size_scale = [0.01, 0.01, 0.01])
 
-        height = 0.02
+        height = 0.002 # or 0.02
         radius = 0.18 / 2
         motion.add_cylinder(name = "dish1", pose = [0.0925, 0.35, height/2], height = height, radius = radius)
-        motion.add_cylinder(name = "dish2", pose = [-0.1075, 0.35, height/2], height = height, radius = radius)
+        # motion.add_cylinder(name = "dish2", pose = [-0.1075, 0.35, height/2], height = height, radius = radius)
 
-        motion.add_cylinder(name = "dish3", pose = [0.0925, -0.35, height/2], height = height, radius = radius)
-        motion.add_cylinder(name = "dish4", pose = [-0.1075, -0.35, height/2], height = height, radius = radius)
+        # motion.add_cylinder(name = "dish3", pose = [0.0935, -0.35, height/2], height = height, radius = radius)
+        motion.add_cylinder(name = "dish4", pose = [-0.1065, -0.35, height/2], height = height, radius = radius)
 
     except rospy.ROSInterruptException:
         return

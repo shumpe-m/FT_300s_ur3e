@@ -12,7 +12,7 @@
   <arg name="debug"      default="false"/>
   <arg name="gui"        default="true"/>
   <arg name="rate"       default="500" />
-  <arg name="world_name" default="$(find ur_gazebo_motion_range)/worlds/motion_range.world" />
+  <arg name="world_name" default="$(find ur_gazebo_motion_range)/worlds/test.world" />
   <arg name="grasp_plugin" default="false"/>
 
   <!--Robot description and related parameter files -->

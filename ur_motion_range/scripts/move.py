@@ -17,7 +17,7 @@ class ur_control(object):
     def __init__(self):
         super(ur_control, self).__init__()
         self.arm_control = arm.arm_control("arm")
-        self.gripper_control = gripper.gripper_control("gripper")
+        self.gripper_control = gripper.gripper_control()
         self.goal_positions = [[0.2, 0.45, 0.2],
                              [0.2, 0.25, 0.2],
                              [-0.21, 0.25, 0.2],
@@ -64,9 +64,15 @@ class ur_control(object):
 
 
     def pick_and_place(self, name = "dish2"):
-        joint_ang = [1.57, -1.57, 1.26, -1.57, -1.57, 0] #0~3.14, -3.14~0, 
-        self.arm_control.go_to_joint_state(joint_ang)
 
+        if name == "dish1" or name == "dish2":
+            joint_ang = [1.57, -1.57, 1.26, -1.57, -1.57, 0] #0~3.14, -3.14~0, 
+            self.arm_control.go_to_joint_state(joint_ang)
+        elif name == "dish3" or name == "dish4":
+            joint_ang = [-1.57, -1.57, 1.26, -1.57, -1.57, 0] #0~3.14, -3.14~0, 
+            self.arm_control.go_to_joint_state(joint_ang)
+
+        # Rearrange the box
         cube_con = cube_control.cube_control()
         cube_con.pose_control(model_name = "cube1", range = name)
         time.sleep(0.2)
@@ -81,6 +87,7 @@ class ur_control(object):
         # e = self.arm_control.quaternion_to_euler(quaternion = po.orientation)
         # print(e)
 
+        # pick 
         pick_p = copy.deepcopy(cube_pose)
         # print(pick_p)
         e = self.arm_control.quaternion_to_euler(quaternion = pick_p.orientation)
@@ -93,7 +100,7 @@ class ur_control(object):
         pick_p.position.z = cube_pose.position.z - 0.78 + 0.01
         # print(pick_p)
         rot_success = self.arm_control.go_to_pose(pose = pick_p, ori = q.tolist())
-        self.gripper_control.gripper_command(0.018, 150.0)
+        self.gripper_control.gripper_command(0.02, 150.0)
         result = self.gripper_control.wait(1.0)
         # print(result)
 
@@ -102,6 +109,10 @@ class ur_control(object):
         self.gripper_control.gripper_command(0.0, 1.0)
         result = self.gripper_control.wait(1.0)
         # print(result)
+        self.arm_control.go_to_joint_state(joint_ang)
+
+        # place
+
 
 
 
@@ -116,11 +127,20 @@ class ur_control(object):
         # pick_p = [0.2, -0.45, 0.2]
         # rot_success = self.arm_control.go_to_pose(pose = pick_p, ori = q.tolist())
 
-        joint_ang = [1.57, -1.57, 1.26, -1.57, -1.57, 0] #0~3.14, -3.14~0, 
+        # joint_ang = [1.57, -1.57, 1.26, -1.57, -1.57, 0] #0~3.14, -3.14~0, 
+        # self.arm_control.go_to_joint_state(joint_ang)
+
+        # joint_ang = [1.57/2, -1.57, 1.26, -1.57, -1.57, 0] #0~3.14, -3.14~0, 
+        # self.arm_control.go_to_joint_state(joint_ang)
+
+        # joint_ang = [1.57, -1.57/2, 1.26, -1.57, -1.57, 0] #0~3.14, -3.14~0, 
+        # self.arm_control.go_to_joint_state(joint_ang)
+
+        joint_ang = [1.57, -1.57, -0.03, -1.57, -1.57, 0] #0~3.14, -3.14~0, 
         self.arm_control.go_to_joint_state(joint_ang)
 
-        joint_ang = [1.57/2, -1.57, 1.26, -1.57, -1.57, 0] #0~3.14, -3.14~0, 
-        self.arm_control.go_to_joint_state(joint_ang)
+
+        # rot_success = self.arm_control.go_to_position(position = [-0.2, -0.2, 0.00])
 
 
 
@@ -130,6 +150,7 @@ def main():
         action = ur_control()
         # action.arm_action()
         # action.gripper_action()
+
         for idx in range(10):
             name = "dish2" if idx % 2 == 0 else "dish3" 
             action.pick_and_place(name)

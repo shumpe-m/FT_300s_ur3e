@@ -14,7 +14,7 @@ from control_msgs.msg import GripperCommandAction, GripperCommandGoal
 
 """Modifications copyright (C) 2022 Shumpe MORITA."""
 class gripper_control(object):
-    def __init__(self, name = 'gripper'):
+    def __init__(self):
         super(gripper_control, self).__init__()
         self.client = actionlib.SimpleActionClient("/gripper_controller/gripper_cmd",GripperCommandAction)
         self.clear() 
