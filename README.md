@@ -26,16 +26,20 @@ roslaunch ur3e_ft300s_gazebo ur_hande_ft300s.launch
 
 - Start rviz.
 ```
-roslaunch ur_hande_moveit_config start_moveit.launch
+roslaunch ur_hande_ft300s_moveit_config start_moveit.launch
 ```
-![rviz](https://raw.github.com/wiki/shumpe-m/FT_300s_ur3e/images/rviz.png)
 - Run rviz_setup.py to limit the orbit range of rviz.
 - Use moveit to control the trajectory of the UR. Run move.py.
 ```
 rosrun ur_control_scripts rviz_setup.py 
 rosrun ur_control_scripts main.py 
 ```
+
+
 ![jig](https://raw.github.com/wiki/shumpe-m/FT_300s_ur3e/images/jig.gif)
+
+
+
 - plotting_2d.py is plotting based on information obtained from /gazebo/link_states. No startup required.
 ```
 rosrun ur_control_scripts plotting_2d.py 

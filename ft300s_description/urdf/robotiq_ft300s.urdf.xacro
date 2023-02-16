@@ -4,7 +4,7 @@
     <xacro:macro name="robotiq_ft300s" params="parent prefix *origin">
 
         <!-- mount the fts to the robot -->
-        <joint name="${prefix}fts_fix" type="fixed" >
+        <joint name="${prefix}ft_fix" type="fixed" >
             <origin xyz="0 0 -0.00" rpy="0 0 0"/>
             <parent link="${parent}" />
             <child link="${prefix}ft_robotside" />
@@ -20,7 +20,7 @@
             <visual>
                 <origin xyz="0 0 0.035851" rpy="${-pi} 0 0" />
                 <geometry>
-                    <mesh filename="package://ft300s_description/meshes/visual/fts300s.stl" scale="0.001 0.001 0.001"/>
+                    <mesh filename="package://ft300s_description/meshes/visual/ft300s.stl" scale="0.001 0.001 0.001"/>
                 </geometry>
                 <material name="black"/>
             </visual>
@@ -28,7 +28,7 @@
             <collision>
                 <origin xyz="0 0 0.035851" rpy="${-pi} 0 0" />
                 <geometry>
-                    <mesh filename="package://ft300s_description/meshes/collision/fts300s.stl" scale="0.001 0.001 0.001"/>
+                    <mesh filename="package://ft300s_description/meshes/collision/ft300s.stl" scale="0.001 0.001 0.001"/>
                 </geometry>
             </collision>
         </link>

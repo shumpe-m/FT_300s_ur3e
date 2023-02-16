@@ -23,53 +23,53 @@ class Ur_control(object):
         self.box_control = model_control.Box_control()
         self.forward_basic_joint = [0.9419943318766126, -1.4060059478330746, 1.4873566760577779, -1.6507993112633637, -1.5705307531751274, -0.629176246773139] # [1.57, -1.57, 1.26, -1.57, -1.57, 0]
         self.backward_basic_joint = [-2.234010390909684, -1.3927192120354697, 1.472050134256044, -1.65123476873738, -1.5690119071493065, 2.478363663037163] # [-1.57, -1.57, 1.26, -1.57, -1.57, 0]
-        """
-        # test positions
-        self.goal_positions = [[0.2, 0.45, 0.2],
-                             [0.2, 0.25, 0.2],
-                             [-0.21, 0.25, 0.2],
-                             [-0.21, 0.45, 0.2],
-                             [0.2, 0.45, 0.03],
-                             [0.2, 0.25, 0.03],
-                             [-0.21, 0.25, 0.03],
-                             [-0.21, 0.45, 0.03],
-                             [-0.21, 0.35, 0.1],
-                             [-0.05, 0.35, 0.1],
-                             [0.2, 0.35, 0.1],
-                             [-0.05, 0.45, 0.1],
-                             [-0.05, 0.35, 0.1],
-                             [-0.05, 0.25, 0.1]]
+
+    #     # test positions
+    #     self.goal_positions = [[0.2, 0.45, 0.2],
+    #                          [0.2, 0.25, 0.2],
+    #                          [-0.21, 0.25, 0.2],
+    #                          [-0.21, 0.45, 0.2],
+    #                          [0.2, 0.45, 0.03],
+    #                          [0.2, 0.25, 0.03],
+    #                          [-0.21, 0.25, 0.03],
+    #                          [-0.21, 0.45, 0.03],
+    #                          [-0.21, 0.35, 0.1],
+    #                          [-0.05, 0.35, 0.1],
+    #                          [0.2, 0.35, 0.1],
+    #                          [-0.05, 0.45, 0.1],
+    #                          [-0.05, 0.35, 0.1],
+    #                          [-0.05, 0.25, 0.1]]
 
 
-    # test function
-    def arm_action_test(self):
-        joint_ang = [1.57, -1.57/2, 1.57/2, -1.57, -1.57, 0]
-        suc_data = []
-        for goal_position in self.goal_positions:
-            print("-----------------------------------------")
-            print(goal_position)
-            print("-----------------------------------------")
-            self.arm_control.go_to_joint_state(joint_ang)
-            default_pose = self.arm_control.print_current_pose()
+    # # test function
+    # def arm_action_test(self):
+    #     joint_ang = [1.57, -1.57/2, 1.57/2, -1.57, -1.57, 0]
+    #     suc_data = []
+    #     for goal_position in self.goal_positions:
+    #         print("-----------------------------------------")
+    #         print(goal_position)
+    #         print("-----------------------------------------")
+    #         self.arm_control.go_to_joint_state(joint_ang)
+    #         default_pose = self.arm_control.print_current_pose()
 
-            suc_n = 0
-            for e_idx in range(5):
-                e_x = e_idx * 2 * math.pi / (3 * 4) -  math.pi / (3)
-                for e_idy in range(5):
-                    print("-----------------------------------------")
-                    e_y = e_idy * 2 * math.pi / (3 * 4) -  math.pi / (3)
-                    print("e_idx : ", e_idx, e_x)
-                    print("e_idy : ", e_idy, e_y)
-                    q = self.arm_control.euler_to_quaternion(euler = [3.14 - e_x, 0 - e_y, 0])
-                    rot_success = self.arm_control.go_to_pose(pose = goal_position, ori = q)
-                    if rot_success == True:
-                        suc_n += 1
-                    print("-----------------------------------------")
-            suc_data.append(suc_n)
-        print("---------------- num of success ----------------")
-        print(suc_data)
-        print("-----------------------------------------")
-        """
+    #         suc_n = 0
+    #         for e_idx in range(5):
+    #             e_x = e_idx * 2 * math.pi / (3 * 4) -  math.pi / (3)
+    #             for e_idy in range(5):
+    #                 print("-----------------------------------------")
+    #                 e_y = e_idy * 2 * math.pi / (3 * 4) -  math.pi / (3)
+    #                 print("e_idx : ", e_idx, e_x)
+    #                 print("e_idy : ", e_idy, e_y)
+    #                 q = self.arm_control.euler_to_quaternion(euler = [3.14 - e_x, 0 - e_y, 0])
+    #                 rot_success = self.arm_control.go_to_pose(pose = goal_position, ori = q)
+    #                 if rot_success == True:
+    #                     suc_n += 1
+    #                 print("-----------------------------------------")
+    #         suc_data.append(suc_n)
+    #     print("---------------- num of success ----------------")
+    #     print(suc_data)
+    #     print("-----------------------------------------")
+
 
 
     def pick_and_place(self, area = "dish2"):
