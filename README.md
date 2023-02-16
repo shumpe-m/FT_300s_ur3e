@@ -31,12 +31,12 @@ roslaunch ur_hande_moveit_config start_moveit.launch
 - Run rviz_setup.py to limit the orbit range of rviz.
 - Use moveit to control the trajectory of the UR. Run move.py.
 ```
-rosrun ur_control_scr rviz_setup.py 
-rosrun ur_control_scr move.py 
+rosrun ur_control_scripts rviz_setup.py 
+rosrun ur_control_scripts move.py 
 ```
 - plotting_2d.py is plotting based on information obtained from /gazebo/link_states. No startup required.
 ```
-rosrun ur_control_scr plotting_2d.py 
+rosrun ur_control_scripts plotting_2d.py 
 ```
 
 
