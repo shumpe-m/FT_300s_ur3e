@@ -16,7 +16,7 @@ cd FT_300s_ur3e/Docker
 
 ## Examples
 
-![demo](https://raw.github.com/wiki/shumpe-m/ur3e_tutorial/images/pick_and_place.mp4)
+![demo](https://raw.github.com/wiki/shumpe-m/FT_300s_ur3e/images/pick_and_place.gif)
 - Each is launched in a separate terminal.(docker exec -it ${docker_container_id} bash)
 
 - Start the simulator (Gazebo).
@@ -28,14 +28,14 @@ roslaunch ur3e_ft300s_gazebo ur_hande_ft300s.launch
 ```
 roslaunch ur_hande_moveit_config start_moveit.launch
 ```
-![rviz](https://raw.github.com/wiki/shumpe-m/ur3e_tutorial/images/rviz.png)
+![rviz](https://raw.github.com/wiki/shumpe-m/FT_300s_ur3e/images/rviz.png)
 - Run rviz_setup.py to limit the orbit range of rviz.
 - Use moveit to control the trajectory of the UR. Run move.py.
 ```
 rosrun ur_control_scripts rviz_setup.py 
 rosrun ur_control_scripts main.py 
 ```
-![demo](https://raw.github.com/wiki/shumpe-m/ur3e_tutorial/images/jig.mp4)
+![jig](https://raw.github.com/wiki/shumpe-m/FT_300s_ur3e/images/jig.gif)
 - plotting_2d.py is plotting based on information obtained from /gazebo/link_states. No startup required.
 ```
 rosrun ur_control_scripts plotting_2d.py 
@@ -45,4 +45,4 @@ rosrun ur_control_scripts plotting_2d.py
 ## Motion trajectory
 - A file "xxx.npy" is generated in the directory where plotting_2d.py was executed. Put the file in /space_data, change the loadfile name of data_plot.py and run it, and the following graph will be generated.
 
-![trajectory](https://raw.github.com/wiki/shumpe-m/ur3e_tutorial/images/motion.png)
+![trajectory](https://raw.github.com/wiki/shumpe-m/FT_300s_ur3e/images/motion.png)
