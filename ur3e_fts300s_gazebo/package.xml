@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>ur3e_fts300s_gazebo</name>
+  <version>0.1.2</version>
+  <description>
+    Gazebo simulation for the UR3e robot with a robotiq gripper and FT-300s.
+  </description>
+
+  <author email="d1301539@gmail.com">Shunpei Morita</author>
+  <maintainer email="d1301539@gmail.com">Shunpei Morita</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <exec_depend>ur3_description</exec_depend>
+  <exec_depend>robotiq_gazebo</exec_depend>
+  <exec_depend>gazebo</exec_depend>
+  <exec_depend>ur3_gazebo</exec_depend>
+
+  <export>
+      <gazebo gazebo_media_path="${prefix}/models" />
+  </export>
+
+</package>

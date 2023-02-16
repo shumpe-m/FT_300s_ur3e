@@ -21,7 +21,7 @@ cd FT_300s_ur3e/Docker
 
 - Start the simulator (Gazebo).
 ```
-roslaunch ur_gazebo_motion_range ur_hande_tf300.launch
+roslaunch ur3e_ft300s_gazebo ur_hande_ft300s.launch
 ```
 - Start rviz.
 ```
@@ -31,12 +31,12 @@ roslaunch ur_hande_moveit_config start_moveit.launch
 - Run rviz_setup.py to limit the orbit range of rviz.
 - Use moveit to control the trajectory of the UR. Run move.py.
 ```
-rosrun ur_motion_range rviz_setup.py 
-rosrun ur_motion_range move.py 
+rosrun ur_control_scr rviz_setup.py 
+rosrun ur_control_scr move.py 
 ```
 - plotting_2d.py is plotting based on information obtained from /gazebo/link_states. No startup required.
 ```
-rosrun ur_motion_range plotting_2d.py 
+rosrun ur_control_scr plotting_2d.py 
 ```
 
 
