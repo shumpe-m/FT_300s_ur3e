@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(ur_control_scr)
+project(ur_control_scripts)
 
 find_package(catkin REQUIRED COMPONENTS
   control_msgs
