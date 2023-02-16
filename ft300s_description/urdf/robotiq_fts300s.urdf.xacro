@@ -20,7 +20,7 @@
             <visual>
                 <origin xyz="0 0 0.035851" rpy="${-pi} 0 0" />
                 <geometry>
-                    <mesh filename="package://fts300s_description/meshes/visual/fts300s.stl" scale="0.001 0.001 0.001"/>
+                    <mesh filename="package://ft300s_description/meshes/visual/fts300s.stl" scale="0.001 0.001 0.001"/>
                 </geometry>
                 <material name="black"/>
             </visual>
@@ -28,7 +28,7 @@
             <collision>
                 <origin xyz="0 0 0.035851" rpy="${-pi} 0 0" />
                 <geometry>
-                    <mesh filename="package://fts300s_description/meshes/collision/fts300s.stl" scale="0.001 0.001 0.001"/>
+                    <mesh filename="package://ft300s_description/meshes/collision/fts300s.stl" scale="0.001 0.001 0.001"/>
                 </geometry>
             </collision>
         </link>
@@ -36,10 +36,10 @@
         <!-- toolside frame -->
         <joint name="${prefix}toolside_joint" type="fixed" >
             <origin xyz="0 0 0.03851" rpy="0 0 0" />
-            <parent link="${prefix}fts_robotside" />
-            <child link="${prefix}fts_toolside" />
+            <parent link="${prefix}ft_robotside" />
+            <child link="${prefix}ft_toolside" />
         </joint>
-        <link name="${prefix}fts_toolside"/>
+        <link name="${prefix}ft_toolside"/>
 
     </xacro:macro>
 </robot>
