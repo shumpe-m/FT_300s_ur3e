@@ -2,6 +2,7 @@
 # Python 2 compatibility imports
 """
 Copyright (c) 2018-2021 Cristian Beltran
+https://github.com/cambel/ur3/blob/noetic-devel/LICENSE
 
 Modifications copyright (C) 2022 Shumpe MORITA.
 """

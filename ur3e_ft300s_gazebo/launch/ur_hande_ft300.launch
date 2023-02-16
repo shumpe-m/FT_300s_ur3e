@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
-<!-- Copyright (c) 2018-2021 Cristian Beltran -->
-<!-- Modifications copyright (C) 2022 Shumpe MORITA. -->
+<!-- 
+Copyright (c) 2018-2021 Cristian Beltran 
+https://github.com/cambel/ur3/blob/noetic-devel/LICENSE 
+Modifications copyright (C) 2022 Shumpe MORITA.
+-->
 <launch>
   <!-- Export env variable so that gazebo finds our models -->
   <env name="GAZEBO_MODEL_PATH"
