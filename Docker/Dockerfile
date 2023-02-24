@@ -1,5 +1,4 @@
 FROM nvidia/opengl:base-ubuntu18.04
-
 ENV DEBIAN_FRONTEND=noninteractive
 
 
@@ -7,6 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ### INSTALL PACKAGES ###
 ########################
 RUN apt-get update && apt-get install -y \
+    sudo \
     vim \
     wget \
     unzip \
@@ -66,7 +66,7 @@ RUN cd /root/catkin_ws \
 ### ur pkg ###
 ##############
 RUN cd /root/catkin_ws \
-    && git clone -b melodic-devel-v2 https://github.com/shumpe-m/ur3.git src/ros_ur3 \
+    && git clone -b melodic-devel-2 https://github.com/shumpe-m/ur3.git src/ros_ur3 \
     && git clone https://github.com/shumpe-m/FT_300s_ur3e.git src/FT_300s_ur3e
 
 RUN cd /root/catkin_ws \
