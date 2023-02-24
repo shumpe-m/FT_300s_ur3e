@@ -214,6 +214,7 @@ class Ur_control(object):
 def main():
     try:
         action = Ur_control()
+<<<<<<< HEAD
         action.reset()
         # action.arm_action_test()
         # action.gripper_action()
@@ -227,6 +228,19 @@ def main():
 
         # action.rearrange("dish1")
         # action.self_reset(area = "bin1")
+=======
+        
+        # pick and place
+        # for idx in range(4):
+        #     name = "dish2" if idx % 2 == 0 else "dish3" 
+        #     action.pick_and_place(name)
+        # action.reset()
+
+        # Using jig
+        action.rearrange("dish1")
+        action.self_reset(area = "bin1")
+        action.reset()
+>>>>>>> 81d6a3c186abfe11ccb5b1707710580e074a9317
 
         # action.joint_test()
         
