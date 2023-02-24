@@ -76,10 +76,10 @@ class Ur_control(object):
         # model name of picking target
         target_model = "box3"
 
-        if area == "dish1" or area == "dish2":
+        if area == "dish1" or area == "bin1":
             pick_basic_joint = self.forward_basic_joint
             place_basic_joint = self.backward_basic_joint
-        elif area == "dish3" or area == "dish4":
+        elif area == "dish2" or area == "bin2":
             pick_basic_joint = self.backward_basic_joint
             place_basic_joint = self.forward_basic_joint
         self.arm_control.go_to_joint_state(pick_basic_joint)
@@ -117,10 +117,10 @@ class Ur_control(object):
         if pick_success:
             self.arm_control.go_to_joint_state(place_basic_joint)
             if area == "bin1":
-                place_zone = "dish2"
+                place_area = "dish2"
             elif area == "bin2":
-                place_zone = "dish1"
-            place_pose = self.box_control.radom_pose(model_name = target_model, area = place_zone, shouldChange = False)
+                place_area = "dish1"
+            place_pose = self.box_control.radom_pose(model_name = target_model, area = place_area, shouldChange = False)
             place_p = copy.deepcopy(place_pose)
             place_p.position.z = 0.2
             # print([place_p.position.x, place_p.position.y, place_p.position.z])
@@ -200,32 +200,35 @@ class Ur_control(object):
         model_reset = model_control.Model_reset()
         model_reset.reset(model_name)
 
-    def ex(self):
-        self.arm_control.go_to_joint_state(self.backward_basic_joint)
-        q = self.arm_control.euler_to_quaternion(euler = [3.14 , 0, 0])
-        self.arm_control.go_to_pose(pose = [-0.1065, -0.35, 0.2], ori = q.tolist())
+    def joint_test(self):
+        self.arm_control.go_to_joint_state(self.forward_basic_joint)
+        joint = copy.deepcopy(self.forward_basic_joint)
+        print(self.arm_control.get_current_joint())
+        joint[4] += math.pi / 10 # 1.4
+        joint[4] = -1*math.pi  * 0# 1.4
         rospy.sleep(0.2)
-        print(type(self.arm_control.get_current_joint()))
+        self.arm_control.go_to_joint_state(joint)
+        print(self.arm_control.get_current_joint())
 
 
 def main():
     try:
         action = Ur_control()
+        action.reset()
         # action.arm_action_test()
         # action.gripper_action()
 
-        # for idx in range(4):
-        #     name = "dish2" if idx % 2 == 0 else "dish3" 
-        #     action.pick_and_place(name)
-        # action.reset()
+        for idx in range(10):
+            area = "bin1" if idx % 2 == 0 else "bin2" 
+            action.pick_and_place(area)
+        action.reset()
 
         # action.pick_and_place(area = "dish3")
 
-        action.rearrange("dish1")
-        action.self_reset(area = "bin1")
-        action.reset()
+        # action.rearrange("dish1")
+        # action.self_reset(area = "bin1")
 
-        action.ex()
+        # action.joint_test()
         
 
     except rospy.ROSInterruptException:
