@@ -17,7 +17,7 @@ cd FT_300s_ur3e/Docker
 ## Examples
 
 ![demo](https://raw.github.com/wiki/shumpe-m/FT_300s_ur3e/images/pick_and_place.gif)
-- Each is launched in a separate terminal.(docker exec -it ${docker_container_id} bash) or /Dockre/exec.sh
+- Each is launched in a separate terminal.'''docker exec -it ${docker_container_id} bash or /Dockre/exec.sh'''
 
 - Start the simulator (Gazebo).
 ```

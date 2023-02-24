@@ -80,4 +80,4 @@ RUN cd /root/catkin_ws \
     && echo "chmod -R u+x /root/catkin_ws/src/FT_300s_ur3e/ur_control_scripts/scripts" >> ~/.bashrc
 
 
-RUN echo "cd ~/catkin_ws" >> ~/.bashrc
+RUN echo "cd /root/catkin_ws" >> ~/.bashrc
