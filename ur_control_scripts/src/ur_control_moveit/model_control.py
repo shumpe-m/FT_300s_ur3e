@@ -21,11 +21,11 @@ class Box_control():
         self.dish_radius = 0.09
         # dish1
         self.dish1_center = [0.0925, 0.35, 0.7801]
-        # dish2
+        # dish2 = bin1
         self.dish2_center = [-0.1075, 0.35, 0.7801]
-        # dish3
+        # dish3 = bin2
         self.dish3_center = [0.0935, -0.35, 0.7801]
-        # dish4
+        # dish4 = dish2
         self.dish4_center = [-0.1065, -0.35, 0.7801]
 
 
@@ -46,7 +46,7 @@ class Box_control():
         elif area == "bin1":
             state_msg.pose.position.x = np.cos(rand[0] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish2_center[0]
             state_msg.pose.position.y = np.sin(rand[1] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish2_center[1]
-        # dish 4
+        # dish 2
         elif area == "dish2":
             state_msg.pose.position.x = np.cos(rand[0] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish4_center[0]
             state_msg.pose.position.y = np.sin(rand[1] * 2 * np.pi) * (self.dish_radius - 0.025) + self.dish4_center[1]

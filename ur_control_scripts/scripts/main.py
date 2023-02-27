@@ -72,7 +72,7 @@ class Ur_control(object):
 
 
 
-    def pick_and_place(self, area = "dish2"):
+    def pick_and_place(self, area = "bin1"):
         # model name of picking target
         target_model = "box3"
 
@@ -91,26 +91,18 @@ class Ur_control(object):
 
         ### Pick ###
         pick_p = copy.deepcopy(box_pose)
-        # print(pick_p)
         e = self.arm_control.quaternion_to_euler(quaternion = pick_p.orientation)
         q = self.arm_control.euler_to_quaternion(euler = [3.14 + e[0], e[1], e[2]])
         pick_p.position.z = 0.2
         self.arm_control.go_to_pose(pose = pick_p, ori = q.tolist())
         self.gripper_control.gripper_command(0.0, 1.0)
         result = self.gripper_control.wait(1.0)
-        # print(result)
         pick_p.position.z = box_pose.position.z - 0.78 + 0.01
-        # print(pick_p)
         pick_success = self.arm_control.go_to_pose(pose = pick_p, ori = q.tolist())
         if pick_success:
             self.gripper_control.gripper_command(0.02, 150.0)
             rospy.sleep(0.5)
             self.gripper_control.grab(link_name=target_model+"::link")
-
-        # pick_p.position.z = 0.2
-        # rot_success = self.arm_control.go_to_pose(pose = pick_p, ori = q.tolist())
-        # result = self.gripper_control.wait(1.0)
-        # print(result)
         self.arm_control.go_to_joint_state(pick_basic_joint)
 
         ### Place ###
@@ -145,8 +137,6 @@ class Ur_control(object):
         rospy.sleep(0.6)
 
     def gripper_action(self):
-        # print(motion.print_current_pose())
-        # gripper_control.gripper_action(joint_values = [0.015, 0.015])
         self.gripper_control.gripper_open()
         self.gripper_control.gripper_close()
 
@@ -165,22 +155,28 @@ class Ur_control(object):
         self.arm_control.go_to_joint_state(self.forward_basic_joint)
         rospy.sleep(0.2)
         if area == "bin1":
-            sweep_posi = [[0.2, 0.35, 0.135],
+            sweep_posi = [[0.2, 0.35, 0.2],
+                         [0.2, 0.35, 0.135],
                          [-0.075, 0.35, 0.135],
+                         [0.2, 0.27, 0.2],
                          [0.2, 0.27, 0.135],
                          [-0.075, 0.27, 0.135]]
         elif area == "bin2":
-            sweep_posi = [[-0.21, -0.35, 0.135],
+            sweep_posi = [[-0.21, -0.35, 0.2],
+                         [-0.21, -0.35, 0.135],
                          [0.075, -0.35, 0.135],
+                         [-0.21, -0.27, 0.2],
                          [-0.21, -0.27, 0.135],
                          [0.075, -0.27, 0.135]]
         if sweep_posi != []:
             self.arm_control.go_to_pose(pose = sweep_posi[0], ori = q.tolist())
             self.arm_control.go_to_pose(pose = sweep_posi[1], ori = q.tolist())
+            self.arm_control.go_to_pose(pose = sweep_posi[2], ori = q.tolist())
             self.arm_control.go_to_joint_state(self.forward_basic_joint)
             rospy.sleep(0.2)
-            self.arm_control.go_to_pose(pose = sweep_posi[2], ori = q.tolist())
             self.arm_control.go_to_pose(pose = sweep_posi[3], ori = q.tolist())
+            self.arm_control.go_to_pose(pose = sweep_posi[4], ori = q.tolist())
+            self.arm_control.go_to_pose(pose = sweep_posi[5], ori = q.tolist())
             self.arm_control.go_to_joint_state(self.forward_basic_joint)
 
         # Release a jig
@@ -216,10 +212,10 @@ def main():
         action = Ur_control()
         
         # pick and place
-        # for idx in range(4):
-        #     name = "dish2" if idx % 2 == 0 else "dish3" 
-        #     action.pick_and_place(name)
-        # action.reset()
+        for idx in range(4):
+            name = "bin1" if idx % 2 == 0 else "bin2" 
+            action.pick_and_place(name)
+        action.reset()
 
         # Using jig
         action.rearrange("dish1")
