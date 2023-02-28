@@ -100,7 +100,7 @@ class Ur_control(object):
         pick_p.position.z = box_pose.position.z - 0.78 + 0.01
         pick_success = self.arm_control.go_to_pose(pose = pick_p, ori = q.tolist())
         if pick_success:
-            self.gripper_control.gripper_command(0.02, 150.0)
+            self.gripper_control.gripper_command(0.02, 15.0)
             rospy.sleep(0.5)
             self.gripper_control.grab(link_name=target_model+"::link")
         self.arm_control.go_to_joint_state(pick_basic_joint)
