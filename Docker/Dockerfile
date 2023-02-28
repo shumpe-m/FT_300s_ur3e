@@ -66,7 +66,7 @@ RUN cd /root/catkin_ws \
 ### ur pkg ###
 ##############
 RUN cd /root/catkin_ws \
-    && git clone -b melodic-devel-2 https://github.com/shumpe-m/ur3.git src/ros_ur3 \
+    && git clone -b noetic-devel-2 https://github.com/shumpe-m/ur3.git src/ros_ur3 \
     && git clone  -b noetic https://github.com/shumpe-m/FT_300s_ur3e.git src/FT_300s_ur3e
 
 RUN cd /root/catkin_ws \
