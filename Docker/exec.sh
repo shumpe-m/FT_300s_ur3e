@@ -1,1 +1,1 @@
-docker exec -it ft_300s_ur3e bash
+docker exec -it ur-ur_noetic bash

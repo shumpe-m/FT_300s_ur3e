@@ -1,7 +1,7 @@
 # FT_300s_ur3e
 - This repository is equipped with robotiq's FT 300-S Force Torque Sensor and Hande on ur3e.
 
-- ubuntu18.04, melodic, python2
+- ubuntu20.04, noetic, python3
 
 - reference https://github.com/cambel/ur3.git
 
