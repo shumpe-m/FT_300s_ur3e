@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# Python 2 compatibility imports
+#!/usr/bin/env python3
 from __future__ import print_function
 from six.moves import input
 
@@ -100,7 +99,7 @@ class Ur_control(object):
         pick_p.position.z = box_pose.position.z - 0.78 + 0.01
         pick_success = self.arm_control.go_to_pose(pose = pick_p, ori = q.tolist())
         if pick_success:
-            self.gripper_control.gripper_command(0.02, 15.0)
+            self.gripper_control.gripper_command(0.01, 1.00)
             rospy.sleep(0.5)
             self.gripper_control.grab(link_name=target_model+"::link")
         self.arm_control.go_to_joint_state(pick_basic_joint)

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# Python 2 compatibility imports
 """
 Copyright (c) 2008-2013, Willow Garage, Inc.
 Copyright (c) 2015-2019, PickNik, LLC.
@@ -153,7 +151,7 @@ class Arm_control(object):
         wpose.position.z = position[2]
         move_group.set_pose_target(wpose)
         # Founding motion plan
-        plan = move_group.plan()
+        plan_success, plan, planningtime, error_code = move_group.plan()
         if plan.joint_trajectory.header.frame_id == "": # No motion plan found.
             print("No motion plan found. position = ", position)
         # Execute plan
@@ -207,7 +205,7 @@ class Arm_control(object):
 
         move_group.set_pose_target(wpose)
 
-        plan = move_group.plan()
+        plan_success, plan, planningtime, error_code = move_group.plan()
         move_group.execute(plan, wait=True)
         move_group.stop()
         move_group.clear_pose_targets()
@@ -248,7 +246,7 @@ class Arm_control(object):
         move_group.set_pose_target(wpose)
 
         print("plan")
-        plan = move_group.plan()
+        plan_success, plan, planningtime, error_code = move_group.plan()
         print("exwcute")
         move_group.execute(plan, wait=True)
         move_group.stop()

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# Python 2 compatibility imports
 import rospy
 from gazebo_msgs.msg import ModelStates
 

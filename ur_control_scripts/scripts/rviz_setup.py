@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Python 2/3 compatibility imports
 """
 Copyright (c) 2008-2013, Willow Garage, Inc.
