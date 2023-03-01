@@ -98,6 +98,10 @@ class Arm_control(object):
         print("============ Printing robot state")
         print(robot.get_current_state())
         print("")
+
+        # planning_time = 10 # [s]
+        # move_group.set_planning_time(planning_time)
+        move_group.set_goal_tolerance(0.01)
         ## END_SUB_TUTORIAL
 
         self.robot = robot

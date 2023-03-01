@@ -5,7 +5,7 @@
 - git:  
     local-name: gazebo_ros_link_attacher
     uri: https://github.com/pal-robotics/gazebo_ros_link_attacher.git
-    version: melodic-devel
+    version: noetic-devel
 - git:  
     local-name: robotiq_urcap_control
     uri: https://github.com/cambel/ros_robotiq_urcap_control.git
@@ -17,11 +17,11 @@
 - git:  
     local-name: universal_robot
     uri: https://github.com/ros-industrial/universal_robot.git
-    version: melodic-devel-staging
+    version: noetic-devel-staging
 - git:  
     local-name: ros_ur3
     uri: https://github.com/shumpe-m/ur3.git
-    version: melodic-devel-v2
+    version: noetic-devel-v2
 - git:  
     local-name: cmake
     uri: https://gitlab.kitware.com/cmake/cmake.git

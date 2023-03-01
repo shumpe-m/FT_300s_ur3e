@@ -156,7 +156,7 @@ def main():
     try:
         print("----------------------------------------------------------")
         setup = Rviz_setup("arm")
-        setup.add_box(name = "FAKE", pose = [3, 3, 0.05], size = [0.1, 0.1, 0.1])
+        # setup.add_box(name = "FAKE", pose = [3, 3, 0.05], size = [0.1, 0.1, 0.1])
         table_length = [0.9, 1.2]
 
         setup.add_box(name = "base_box", pose = [0, 0, 0.05], size = [table_length[0], 0.13, 0.099])
