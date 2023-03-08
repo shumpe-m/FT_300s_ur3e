@@ -17,7 +17,7 @@ cd FT_300s_ur3e/Docker
 ## Examples
 
 ![demo](https://raw.github.com/wiki/shumpe-m/FT_300s_ur3e/images/pick_and_place.gif)
-- Each is launched in a separate terminal.'''docker exec -it ${docker_container_id} bash or /Dockre/exec.sh'''
+- Each is launched in a separate terminal.'''bash run.sh''
 
 - Start the simulator (Gazebo).
 ```
@@ -46,7 +46,11 @@ rosrun ur_control_scripts plotting_2d.py
 ```
 
 
-## Motion trajectory
-- A file "xxx.npy" is generated in the directory where plotting_2d.py was executed. Put the file in /space_data, change the loadfile name of data_plot.py and run it, and the following graph will be generated.
+## Usage with real Hardware
+"""
+roslaunch ur_calibration calibration_correction.launch   robot_ip:=192.168.1.103 target_filename:="${HOME}/my_robot_calibration.yaml"
+"""
+"""
+roslaunch ur_robot_driver ur3e_bringup.launch robot_ip:=192.168.1.103 kinematics_config:=/root/my_robot_calibration.yaml
+"""
 
-![trajectory](https://raw.github.com/wiki/shumpe-m/FT_300s_ur3e/images/motion.png)

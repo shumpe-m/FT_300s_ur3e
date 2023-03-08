@@ -1,1 +1,0 @@
-docker exec -it ur-ur_noetic bash

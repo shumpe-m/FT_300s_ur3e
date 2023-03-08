@@ -1,4 +1,11 @@
-FROM nvidia/opengl:base-ubuntu20.04
+FROM osrf/ros:noetic-desktop-full
+
+WORKDIR /root/
+
+ENV NVIDIA_VISIBLE_DEVICES \
+    ${NVIDIA_VISIBLE_DEVICES:-all}
+ENV NVIDIA_DRIVER_CAPABILITIES \
+    ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
 ENV DEBIAN_FRONTEND=noninteractive
 
 
@@ -11,23 +18,9 @@ RUN apt-get update && apt-get install -y \
     wget \
     unzip \
     git \
+    iputils-ping net-tools \
     python3-tk \
     python3-pip
-
-
-###################
-### ROS noetic ###
-###################
-RUN apt-get update && apt-get install -y \
-    lsb-release \
-    curl \
-    gnupg2 
-RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
-RUN apt-get update && apt-get install -y \
-	ros-noetic-desktop-full \
-	&& echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
-
 
 #####################
 ### INSTALL CMAKE ###
@@ -54,12 +47,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-catkin-tools \
     ros-noetic-moveit-commander \
     python3 \
-    ros-noetic-universal-robots
+    ros-noetic-universal-robots \
+    build-essential
 
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash"
 RUN mkdir -p /root/catkin_ws/src
 RUN cd /root/catkin_ws \
-    && git clone https://github.com/UniversalRobots/Universal_Robots_ROS_Driver.git src/Universal_Robots_ROS_Driver
+    && git clone https://github.com/UniversalRobots/Universal_Robots_ROS_Driver.git src/Universal_Robots_ROS_Driver 
 
 
 ##############
@@ -69,6 +63,7 @@ RUN cd /root/catkin_ws \
     && git clone -b noetic-devel-2 https://github.com/shumpe-m/ur3.git src/ros_ur3 \
     && git clone  -b noetic https://github.com/shumpe-m/FT_300s_ur3e.git src/FT_300s_ur3e
 
+RUN rm -rf /etc/ros/rosdep/sources.list.d/20-default.list
 RUN cd /root/catkin_ws \
     && rosinstall /root/catkin_ws/src /opt/ros/noetic src/ros_ur3/dependencies.rosinstall \
     && apt-get update -qq \
