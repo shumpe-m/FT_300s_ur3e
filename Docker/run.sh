@@ -1,4 +1,5 @@
-docker run --name ft_300s_ur3e --gpus all --rm -it  \
+#!/bin/bash
+docker run --gpus all --rm -it --net host --ipc host\
     -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY \
     -v $HOME/FT_300s_ur3e:/root/FT_300s_ur3e \
-    ft_300s_ur3e bash
+    ft_300s_ur3e:melodic bash

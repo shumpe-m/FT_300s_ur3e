@@ -1,1 +1,0 @@
-docker exec -it ft_300s_ur3e bash
